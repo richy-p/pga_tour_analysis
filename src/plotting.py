@@ -48,16 +48,17 @@ def make_win_top10_heatmaps(df,group,just_top_performers=False):
     '''
     if just_top_performers:
         df = df[(df['Wins rank']<=3) | (df['Top 10 rank']<=3)]
+        title_str = 
+        save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_top_performers_{group.name.replace(" ","_")}.png'
+    else:
+        title_str = group.name
+        save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_{group.name.replace(" ","_")}.png'
     corr = df[['Wins','Top 10']+group.column_names].corr()
     fig,ax = plt.subplots()
     sns.heatmap(corr.iloc[:2,2:], annot=True,ax=ax)
     ax.set_title(group.name)
     ax.set_xticklabels(group.proper_names)
-    fig.tight_layout()
-    if just_top_performers:
-        save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_top_performers_{group.name.replace(" ","_")}.png'
-    else:
-        save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_{group.name.replace(" ","_")}.png'
+    fig.tight_layout()      
     fig.savefig(save_path_name)
 
 def make_win_top10_quad_heatmaps(df,stat_groups):
