@@ -56,7 +56,8 @@ Max wins in a year - 5 by Tiger in 2013
 Max top 10 in year - 14 by Spieth in 2015  
 
 Overall
-Dustin Johnson 13 Wins 59 top 10s
+Dustin Johnson 13 Wins 
+Matt Kuchar 66 top 10s
 
 
 Ranked in the top 3 wins or top 10s

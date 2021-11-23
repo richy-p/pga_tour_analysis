@@ -29,6 +29,13 @@ First lets review the traditional statistics. The table below gives a descriptio
 
 ###  Traditional Statistics <a name='trad_stats_table'>  </a>
 
+<details>
+    <summary>Overview image</summary>
+
+![](images/masters-shot-track.png)
+
+</details>
+
 | Statistic Name | Description |
 |---|---|
 | **Driving Distance** | The average number of yards per measured drive. |
@@ -36,13 +43,6 @@ First lets review the traditional statistics. The table below gives a descriptio
 | **Greens in Regulation (GIR)** | The percent of time a player was able to hit the green in regulation  <br>Note: A green is considered hit in regulation if any portion of the ball is touching the putting surface after the 1st stroke on a par 3, 2nd on a par 4, or 3rd on a par 5. |
 | **Scrambling** | The percent of time a player misses the Green in Regulation, but still makes par or better. |
 | **Putts per Round** | The average number of putts a player takes each round. |
-
-<details>
-    <summary>Overview image</summary>
-
-![](images/masters-shot-track.png)
-
-</details>
 
 [Jump to Strokes Gained](#sg_table)
 
@@ -121,7 +121,7 @@ For the traditional statistics the driving distance and GIR have the highest cor
 ![](images/win_top10_heatmap_top_performers_Strokes_Gained_Ranks.png)
 
 [Jump to Distributions](#player-statistical-distributions)
-
+[Jump to SG](#sg_violin)
 
 For the strokes gained statistics approach-the-green has the highest correlation with wins and putting has the lowest (nearly zero). For top 10s putting has the highest correlation and off-the-tee (driving) has the lowest.
 
