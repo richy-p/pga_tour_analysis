@@ -14,13 +14,10 @@ def change_nan_to_0(df,columns):
     df[columns] = df[columns].fillna(0)
     return df
 
-def add_rank_column(df,column,is_ascending=False):
-    '''
-    Insert a column with the rank for the specified column, grouped by year
-    '''
-    df.insert(df.columns.get_loc(column)+1,f'{column} rank', df.groupby('Year')[column].rank(method="min",ascending=is_ascending))
-
 def insert_rank_columns(df):
+    '''
+    Add rank columns to each statistical column in the data frame, df. (All columns except name and year)
+    '''
     for column in df.columns:
         if column == 'Player Name' or column == 'Year':
             continue
@@ -29,14 +26,19 @@ def insert_rank_columns(df):
         else:
             add_rank_column(df,column)
     return df
+
+def add_rank_column(df,column,is_ascending=False):
+    '''
+    Insert a column with the rank for the specified column, grouped by year. New rank column is inserted directly after applicable column
+    INPUT:  df - data frame
+            column - str - Name of column in df to use to compute the rank
+            is_ascending - bool - option to be passed to rank method. Default is False - set to true if lower is better rank
+    '''
+    df.insert(df.columns.get_loc(column)+1,f'{column} rank', df.groupby('Year')[column].rank(method="min",ascending=is_ascending))
+
  
 
 if __name__ == "__main__":
-    df_original = get_data()
-    columns_of_interest = ['Player Name', 'Year', 'Wins', 'Top 10', 'Fairway Percentage', 'Avg Distance', 'gir', 'Average Scrambling', 'Average Putts', 'Average Score', 'SG:OTT', 'SG:APR', 'SG:ARG', 'Average SG Putts', 'Average SG Total']
-
-    df = df_original.loc[:,columns_of_interest]
-    df = change_nan_to_0(df,['Wins','Top 10'])
-    df = insert_rank_columns(df)
+    pass
 
     

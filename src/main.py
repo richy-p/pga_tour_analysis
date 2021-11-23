@@ -1,7 +1,6 @@
-from matplotlib.pyplot import get
 import get_clean_and_prep as gcp
 import plotting as myplt
-import pandas as pd
+
 
 
 class StatisticsGroup(object):
@@ -61,7 +60,6 @@ if __name__ == "__main__":
     avg_putts_column = StatisticsGroup('Average Putts per Round', ['Average Putts'],'Number of Putts')
     traditional_stats_rank = StatisticsGroup('Traditional Statistic Ranks',[stat + ' rank' for stat in traditional_stats.column_names])
     strokes_gained_stats_rank = StatisticsGroup('Strokes Gained Ranks',[stat + ' rank' for stat in strokes_gained_stats.column_names])
-    quad_stat_groups = [traditional_stats,traditional_stats_rank, strokes_gained_stats, strokes_gained_stats_rank]
     
     # Make a side by side scatter plots showing statistic category dependencies.
     myplt.make_double_scatter_plot(df,['gir','Average Scrambling'],'Average Putts',alpha=.5,title='Dependency between Traditional Statistics',with_top_performers=False,save_path='/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/dependency_between_gir_scrambling_putts.png')    

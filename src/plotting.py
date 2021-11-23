@@ -18,9 +18,10 @@ def make_double_scatter_plot(df,xcols,ycol,alpha=1,with_top_performers=True,titl
             save_path   -   str - path and filename for figure to be saved
     OUTPUT: fig,axs handles
     '''
-    columns_of_interest = ['Player Name', 'Year', 'Wins', 'Top 10', 'Fairway Percentage', 'Avg Distance', 'gir', 'Average Scrambling', 'Average Putts', 'Average Score', 'SG:OTT', 'SG:APR', 'SG:ARG', 'Average SG Putts', 'Average SG Total']
+    # map df column names to proper names to be used on the figure
+    column_names = ['Player Name', 'Year', 'Wins', 'Top 10', 'Fairway Percentage', 'Avg Distance', 'gir', 'Average Scrambling', 'Average Putts', 'Average Score', 'SG:OTT', 'SG:APR', 'SG:ARG', 'Average SG Putts', 'Average SG Total']
     proper_column_names = ['Player Name','Year','Wins','Top 10 Finishes','Driving Accuracy','Driving Distance','GIR','Scrambling','Putts Per Round','Scoring Average    ','SG: Off-the-Tee    ','SG: Approach-the-Green','SG: Around-the-Green','SG: Putting','SG: Total']
-    proper_name_dict = dict(zip(columns_of_interest,proper_column_names))
+    proper_name_dict = dict(zip(column_names,proper_column_names))
     fig,axs = plt.subplots(1,2,sharey=True,figsize=(10,5))
     for i in range(2):
         df.plot.scatter(xcols[i],ycol,ax=axs[i],alpha=alpha)
@@ -83,7 +84,13 @@ def make_win_top10_quad_heatmaps(df,stat_groups):
     fig.savefig(f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_quad_heatmaps_{year_string}.png')   
 
 def make_violin_top_performer_plots(df,group,orientation='v',show_legend=True):
-    
+    '''
+    Make violin plot of the specified statistic group to show the distribution of all players, and overlay the top performers.
+    INPUT:  df - data frame
+            group - statistics_group object - indicates what columns to use for figure
+            orientation - str - 'v' or 'h' 
+            show_legend - bool 
+    '''
     if orientation == 'v':
         figsize=(12,10)
     else:
