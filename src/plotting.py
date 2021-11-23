@@ -27,8 +27,8 @@ def make_double_scatter_plot(df,xcols,ycol,alpha=1,with_top_performers=True,titl
         if with_top_performers:
             top_wins_mask = df['Wins rank']<=3
             top_top10s_mask = df['Top 10 rank']<=3
-            df[top_top10s_mask].plot.scatter(xcols[i],ycol,ax=axs[i],alpha=alpha,color='darkblue',ec='black',label='Most Top 10s')
-            df[top_wins_mask].plot.scatter(xcols[i],ycol,ax=axs[i],alpha=alpha,color='gold',ec='black',label='Most Wins')
+            df[top_top10s_mask].plot.scatter(xcols[i],ycol,ax=axs[i],alpha=alpha,color='darkblue',edgecolor='black',label='Most Top 10s')
+            df[top_wins_mask].plot.scatter(xcols[i],ycol,ax=axs[i],alpha=alpha,color='gold',edgecolor='black',label='Most Wins')
         axs[i].set_xlabel(proper_name_dict[xcols[i]])
     axs[0].set_ylabel(proper_name_dict[ycol])
     if with_top_performers:
@@ -67,7 +67,7 @@ def make_win_top10_heatmaps(df,group,just_top_performers=False,top_performer_ran
 
 def make_win_top10_quad_heatmaps(df,stat_groups):
     '''
-    Makes a figure with 4 subplots of heat maps showing the correlation between wins/top 10s and the Traditional and Strokes Gained statistics as well as the ranks for each.
+    Makes a figure with 4 subplots of heat maps showing the correlation between wins/top 10s and the Traditional and Strokes Gained statistics as well as the ranks for each. Used for EDA.
     INPUT:  df - data frame
             stat_groups - list of 4 statistics_group objects
     '''
@@ -105,7 +105,23 @@ def make_violin_top_performer_plots(df,group,orientation='v',show_legend=True):
         ax.legend(by_label.values(),by_label.keys())
     fig.tight_layout()
     fig.savefig(f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/violins_with_top_players_overlaid_{group.name.replace(" ","_")}.png')
-    
+
+def make_player_overview_plot(df,player):
+    '''
+    Plots the strokes gained statistics and number of wins and top 10s for each year for an individual player.
+    INPUT: df - data frame
+           player -  str 
+    '''
+    fig,axs = plt.subplots(2,1,sharex=True)
+    df[df['Player Name']==player].plot(x='Year',y=['SG:OTT','SG:APR','SG:ARG','Average SG Putts'],ax=axs[0])
+    axs[0].set_ylabel('Strokes Gained')
+    axs[0].legend(['SG:OTT','SG:APP','SG:ARG','SG:Putting'],bbox_to_anchor=(1,0.5),loc='center left')
+    df[df['Player Name']==player].plot(x='Year',y=['Top 10','Wins'],ax=axs[1])
+    axs[1].set_ylabel('Wins/Top 10s')
+    axs[1].legend(['Top 10s','Wins'],bbox_to_anchor=(1,0.5),loc='center left')
+    fig.suptitle(f'{player} Overview')
+    fig.tight_layout()
+    fig.savefig(f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/player_overview_{player.replace(" ","_")}.png')
 
 if __name__ == "__main__":
     pass

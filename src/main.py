@@ -1,3 +1,4 @@
+from matplotlib.pyplot import get
 import get_clean_and_prep as gcp
 import plotting as myplt
 import pandas as pd
@@ -28,15 +29,20 @@ class StatisticsGroup(object):
     def __get_proper_names(self):
         return [self._proper_name_dict[col] for col in self.column_names]
     
-
-
-# class StatisticsCategory(object):
-#     def __init__(self,name,statistics_column_name,units=None,is_ascending_improving=True):
-#         self.name = name
-#         self.column_names = statistics_column_name
-#         self.units = units
-#         self.is_ascending_improving = is_ascending_improving
-    
+def get_top_individuals(df):
+    '''
+    Get the player with the most total wins, most total top 10s, and the most yearly top performances
+    INPUT: df - data frame
+    OUTPUT: individual_track_list - list of unique player names
+    '''
+    individual_track_list = []
+    for col in ['Wins','Top 10']:
+        individual_track_list.append(df.groupby('Player Name').sum()[[col]].idxmax()[0])
+    top_performers = df[(df['Wins rank']<=3) | (df['Top 10 rank']<=3)]
+    top_performers_name_list = list(top_performers['Player Name'])
+    num_yearly_top_performances = {name: top_performers_name_list.count(name) for name in top_performers_name_list}
+    individual_track_list.append(max(num_yearly_top_performances, key=num_yearly_top_performances.get))
+    return list(set(individual_track_list))
 
 
 if __name__ == "__main__":
@@ -47,30 +53,30 @@ if __name__ == "__main__":
     df = gcp.change_nan_to_0(df,['Wins','Top 10'])
     df = gcp.insert_rank_columns(df)
 
-    # group column names together to make calling easier
+    # group column names together to make calling easier for making figures
     traditional_stats = StatisticsGroup('Traditional Statistics',['Fairway Percentage', 'Avg Distance', 'gir',  'Average Scrambling', 'Average Putts'])
     strokes_gained_stats = StatisticsGroup('Strokes Gained Statistics',['SG:OTT', 'SG:APR', 'SG:ARG','Average SG Putts'],'Strokes Gained')
     fairway_green_scramble_pct_columns = StatisticsGroup('Fairways, Greens, and Scrambling',['Fairway Percentage', 'gir', 'Average Scrambling'],'Percent')
     distance_off_tee_column = StatisticsGroup('Distance off the Tee',['Avg Distance'],'Distance (yards)')
     avg_putts_column = StatisticsGroup('Average Putts per Round', ['Average Putts'],'Number of Putts')
-
-    # I haven't made proper names for ranks so these will not work when object instantiated. Not sure I was going to use them anyway. May come back to them later.
     traditional_stats_rank = StatisticsGroup('Traditional Statistic Ranks',[stat + ' rank' for stat in traditional_stats.column_names])
     strokes_gained_stats_rank = StatisticsGroup('Strokes Gained Ranks',[stat + ' rank' for stat in strokes_gained_stats.column_names])
     quad_stat_groups = [traditional_stats,traditional_stats_rank, strokes_gained_stats, strokes_gained_stats_rank]
     
-    # myplt.make_win_top10_quad_heatmaps(df,quad_stat_groups)
-    # for year in df.Year.unique():
-        # myplt.make_win_top10_quad_heatmaps(df[df['Year']==year],quad_stat_groups)
-    
-    # Make a few scatter plots to show why Strokes Gained statistics are used.
+    # Make a side by side scatter plots showing statistic category dependencies.
     myplt.make_double_scatter_plot(df,['gir','Average Scrambling'],'Average Putts',alpha=.5,title='Dependency between Traditional Statistics',with_top_performers=False,save_path='/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/dependency_between_gir_scrambling_putts.png')    
     myplt.make_double_scatter_plot(df,['SG:APR','SG:ARG'],'Average SG Putts',alpha=.5,title='Dependency between Strokes Gained Statistics',with_top_performers=False,save_path='/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/dependency_between_SG_apr_arg_putting.png')    
 
+    # make correlation maps
     for group in [traditional_stats,strokes_gained_stats,traditional_stats_rank,strokes_gained_stats_rank]:
         myplt.make_win_top10_heatmaps(df,group,just_top_performers=True)
 
+    # make distrobution plots
     myplt.make_violin_top_performer_plots(df,strokes_gained_stats)
     myplt.make_violin_top_performer_plots(df,distance_off_tee_column,show_legend=True,orientation='h')
     myplt.make_violin_top_performer_plots(df,fairway_green_scramble_pct_columns)
     myplt.make_violin_top_performer_plots(df,avg_putts_column,show_legend=True,orientation='h')
+
+    individual_track_list = get_top_individuals(df)
+    for player in individual_track_list:
+        myplt.make_player_overview_plot(df,player)

@@ -1,9 +1,5 @@
-For the traditional statistics the driving distance and GIR have the highest correlation to wins but putts per round is significantly higher than the rest for top 10 finishes. Driving accuracy seems the least important and distance doesn't seem to matter for top 10 finishes.
-
-
-
 # PGA TOUR Player Results vs Average Statistical Performance
-
+![](images/golf_image.jpg)
 
 
 ## Overview
@@ -84,7 +80,7 @@ A sample of how the data is formatted is given below. Each row is an individual 
 |  3 | Ryan Moore     |       78 |                71.94 |   2018 |          289.2 | 68.8  |           29.17 |                64.16 |          70.015 | 795      |    nan |        5 |             -0.271 |              0.941 |    0.406 |    0.532 |    0.273 | $1,986,608 |
 |  4 | Brian Stuard   |      103 |                71.44 |   2018 |          278.9 | 67.12 |           29.11 |                59.23 |          71.038 | 421      |    nan |        3 |              0.164 |              0.062 |   -0.227 |    0.099 |    0.026 | $1,089,763 |
 
- The data set included 2,312 rows which had 526 unique players over the 9 years. There were 157 players with at least one win and 391 players with at least one top 10. There were 78 players with more than one win over 9 years but only 29 who had more than one win in a single year. The most wins in a single year was 5 by Tiger Woods in 2013. The most top 10 finishes in a single year was 14 by Jordan Spieth in 2015. Over the 9 years Dustin Johnson had the most cumulative wins and top 10 finishes with 13 and 59 respectively.
+ The data set included 2,312 rows which had 526 unique players over the 9 years. There were 157 players with at least one win and 391 players with at least one top 10. There were 78 players with more than one win over 9 years but only 29 who had more than one win in a single year. The most wins in a single year was 5 by Tiger Woods in 2013. The most top 10 finishes in a single year was 14 by Jordan Spieth in 2015. Over the 9 years Dustin Johnson had the most cumulative wins with 13 and and Matt Kuchar had the most cumulative top 10 finishes with 66.
 
 ## Analysis
 ### Defining Top Performers
@@ -130,6 +126,16 @@ That being said, I already made the case that traditional statistics are not the
 ![](images/violins_with_top_players_overlaid_Strokes_Gained_Statistics.png)
 
 ### Single Player Trends
+
+To try and get a little more insight I looked at a couple of the top players over the nine year span. Dustin Johnson had 13 wins (the most during that time) and 64 top 10 finishes.  Matt Kuchar had  4 wins and 66 top 10 finishes (the most during that time). Kuchar was also on the my defined top performer list 6 out of the 9 years, two more times than any other golfer. The figures below show the strokes gained averages for each aspect each year, and below it the number of wins and top 10 finishes the player had that year.  Johnson is known as big hitter and the stats clearly show that is the strength of his game. There was only one year where he gained more strokes on average than off-the-tee. The only year he didn't win was his worst year putting, but despite this he still managed 5 top 10s. Overall Dustin Johnson is evidence that driving the ball well can be the key to success. 
+
+Matt Kuchar is a great player to contrast with Dustin Johnson. Kuchar's weakest part of the game, with respect to strokes gained, is most often off-the-tee. That being said, he was not losing strokes (until 2018) so he was still driving the ball better than the average TOUR player. Kuchar typically gained the most strokes from approach shots and putting. Comparing these two individuals shows that there isn't just one way to play the game to be successful. 
+
+![](images/player_overview_Dustin_Johnson.png)
+
+![](images/player_overview_Matt_Kuchar.png)
+
+
 
 ## Conclusions/Future Work
 
