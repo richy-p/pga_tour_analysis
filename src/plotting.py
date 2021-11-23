@@ -3,7 +3,7 @@ import seaborn as sns
 
 
 sns.set_theme(style='darkgrid')
-plt.rcParams.update({'font.size': 14, 'font.family': 'sans'})
+plt.rcParams.update({'font.size': 12, 'font.family': 'sans'})
 
 def make_double_scatter_plot(df,xcols,ycol,alpha=1,with_top_performers=True,title=None,show_legend=True,save_path=None):
     '''
@@ -43,28 +43,22 @@ def make_double_scatter_plot(df,xcols,ycol,alpha=1,with_top_performers=True,titl
     return fig,axs
     
 
-def make_win_top10_heatmaps(df,group,just_top_performers=False):
+def make_win_top10_heatmaps(df,group,just_top_performers=False,top_performer_rank_limit=3):
     '''
     Make win and top 10 heatmaps of the specified statistical group
     INPUT - df - data frame, group - statistics group class obj
-            just_top_performers - bool - if true then the correlation will only be between players ranked in the top 3 for wins or top 10s in a year
+            just_top_performers - bool - if true then the correlation will only be between players ranked in the top X(set by top_performer_rank_limit) for wins or top 10s in a year
+            top_performer_rank_limit - int - rank to include up to for top performers - default is 3 (players ranked 3rd or higher)
     '''
     if just_top_performers:
-        df = df[(df['Wins rank']<=3) | (df['Top 10 rank']<=3)]
+        df = df[(df['Wins rank']<=top_performer_rank_limit) | (df['Top 10 rank']<=top_performer_rank_limit)]
         title_str = f'{group.name} Correlation of Finishes for Top Performers'
         save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_top_performers_{group.name.replace(" ","_")}.png'
     else:
         title_str = group.name
         save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_{group.name.replace(" ","_")}.png'
-    # corr = df[['Wins','Top 10']+group.column_names].corr()
-    # fig,ax = plt.subplots()
-    # sns.heatmap(corr.iloc[:2,2:], annot=True,ax=ax)
-    # ax.set_title(title_str)
-    # ax.set_xticklabels(group.proper_names,rotation=90)
-    # fig.tight_layout()      
-    # fig.savefig(save_path_name)
     corr = df[['Wins','Top 10']+group.column_names].corr()
-    fig,ax = plt.subplots()
+    fig,ax = plt.subplots(figsize=(4.5,3))
     sns.heatmap(corr.iloc[2:,:2], annot=True,ax=ax)
     ax.set_title(title_str)
     ax.set_yticklabels(group.proper_names)
@@ -91,13 +85,13 @@ def make_win_top10_quad_heatmaps(df,stat_groups):
 def make_violin_top_performer_plots(df,group,orientation='v',show_legend=True):
     
     if orientation == 'v':
-        figsize=(4*len(group),10)
+        figsize=(12,10)
     else:
         figsize=(12,3*len(group))
     fig,ax = plt.subplots(figsize=figsize)
     sns.violinplot(data=df[group.column_names],inner='quartile',cut=0,scale='count',ax=ax,color='forestgreen',orient=orientation)
-    sns.swarmplot(data=df[df['Top 10 rank']<=3][group.column_names],ax=ax,color='blue',edgecolor='black',linewidth=1,size=4,label='Golfer ranked in the Top 3 for the most Top 10 finishes in a year',orient=orientation)
-    sns.swarmplot(data=df[df['Wins rank']<=3][group.column_names],ax=ax,color='gold',edgecolor='black',linewidth=1,size=4,label='Golfer ranked in the Top 3 for the most Wins in a year',orient=orientation)
+    sns.swarmplot(data=df[df['Top 10 rank']<=3][group.column_names],ax=ax,color='blue',edgecolor='black',linewidth=1,size=4,label='Golfer ranked in Top 3 for most Top 10 finishes in a year',orient=orientation)
+    sns.swarmplot(data=df[df['Wins rank']<=3][group.column_names],ax=ax,color='gold',edgecolor='black',linewidth=1,size=4,label='Golfer ranked in Top 3 for most Wins in a year',orient=orientation)
     if orientation =='v':
         ax.set_xticklabels(group.proper_names)
         ax.set_ylabel(group.units)

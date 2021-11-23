@@ -1,3 +1,5 @@
+For the traditional statistics the driving distance and GIR have the highest correlation to wins but putts per round is significantly higher than the rest for top 10 finishes. Driving accuracy seems the least important and distance doesn't seem to matter for top 10 finishes.
+
 
 
 # PGA TOUR Player Results vs Average Statistical Performance
@@ -5,7 +7,7 @@
 
 
 ## Overview
-There is an old golf adage that you "Drive for show and putt for dough." The idea behind it is that while hitting the ball a long ways is impressive, putting is more important to top finishes in tournaments. Despite this adage it seems like professional golfers are always trying to get more distance off the tee. So is this adage true? What is more important to winning, driving or putting? Or is somewhere between the tee and the green? The purpose of this analysis is to investigate whether a single aspect of golf tends to lead to better tournament results.
+There is an old golf adage that you "Drive for show and putt for dough." The idea behind it is that while hitting the ball a long ways is impressive, putting is more important to top finishes in tournaments. Despite this adage it seems like professional golfers are always trying to get more distance off the tee. So is this adage true? What is more important to winning, driving or putting? Or is it somewhere between the tee and the green? The purpose of this analysis is to investigate whether a single aspect of golf tends to lead to better tournament results.
 
 ## Background
 ### Golf in General
@@ -17,12 +19,19 @@ There are four main aspects of golf: driving, approach the green, around the gre
 - Around the green shots are those taken within 30 yards of the green.
 - Putting is any shot taken on the green. 
 
+[test link](#test)
+
 ### The PGA TOUR
+
 The PGA TOUR is the premier professional golf tour in North America. While it is based in the United States the best international golfers also participate in PGA TOUR events. Each tournament consists of four rounds which are typically played on Thursday through Sunday. Each round consists of 18 holes and the final tournament standings are based on who has the lowest total strokes after the final round. A full tournament will have 156 players to start. After two rounds there is a cut and only about 70 players with the lowest score to that point continue to play the weekend. 
 
 ### Tracked Statistics
 The PGA TOUR tracks several statistics to indicate players performance and rate each aspect of their game. A complete list of all tracked stats can be found on the [PGA TOUR site](https://www.pgatour.com/stats.html).  I will review a few major statistical categories that will be used in this analysis. These can be divided into two groups, traditional and strokes gained. Traditional statistics have been used for decades while the strokes gained were introduced in 2011 for putting and 2016 for other aspects.
 First lets review the traditional statistics. The table below gives a description of the 5 main statistics that most casual golfers are familiar with.
+
+[Traditional Statistics Description][traditional_stats_table]
+
+<a name='test'>
 
 | Statistic Name | Description |
 |---|---|
@@ -32,9 +41,11 @@ First lets review the traditional statistics. The table below gives a descriptio
 | **Scrambling** | The percent of time a player misses the Green in Regulation, but still makes par or better. |
 | **Putts per Round** | The average number of putts a player takes each round. |
 
+</a>
+
 The benefit of these traditional statistics are they are very straightforward and easy to calculate. A golfer at any skill level could track these for themselves during a round. Where these statistics lack is the ability to isolate each aspect of golf to a single stat. This is due to the fact that each subsequent shot is dependent on the prior result. The figure below shows how the number of putts per round is related to both the GIR percentage and scrambling percentage. 
 
-![](images/dependency_between_gir_scrambling_putts.png)
+![](images/dependency_between_gir_scrambling_putts.png)[Jump to next table][sg_table]
 
 There is clearly a trend where the higher the GIR percentage the more average putts per round are taken. Intuitively this makes sense. A player who misses the green in regulation takes an extra shot to get on the green. That extra shot is usually taken closer around the green and hence has a higher probability of ending up closer to the hole than a player hitting the green in regulation.  
 
@@ -43,6 +54,8 @@ There is also shown in the figure that higher scrambling percentages correlate t
 Consider how the GIR percentage could also be dependent on the Driving Distance and Driving Accuracy. Due to the dependent nature of these statistics it is difficult to make conclusions such as how good a player is at putting just based on the average putts per round. 
 
 The strokes gained concept was developed by Professor Mark Broadie from Columbia University as a way to isolate each aspect of the game. I will give a brief overview of the concept but a more in depth description is on the [PGA TOUR strokes gained site](https://www.pgatour.com/news/2016/05/31/strokes-gained-defined.html). The strokes gained (SG) concept measures how well a player performs each shot based on the average tour player. The concept is made possible because of a ShotLink data that has been recorded since 2004.  There is a baseline for the average number of strokes it takes tour players to hole out from various distances based on where the shot is taken from (tee, fairway, rough, green, or other). The SG for each stroke has to do with what the expected number of strokes are from the current position and the expected number of strokes from where the shot ends up. There is a SG statistic for each of the four aspects of golf, they are listed in the table below.
+
+[sg_table]: Strokes Gained Statistics
 
 | Name | Description |
 |---|---|
@@ -87,10 +100,13 @@ Instead of comparing the correlation of actual statistics to the tournament resu
 The two figure below shows the correlation between the number of wins and top 10 finishes each year and where the players ranked in statistical categories. The first figure is for the traditional statistics and the second is for the strokes gained statistics. Note that because the correlation is to rank values (1st, 2nd, 3rd, etc.), a higher negative correlation is better. 
 
 ![](images/win_top10_heatmap_top_performers_Traditional_Statistic_Ranks.png)
+
+For the traditional statistics the driving distance and GIR have the highest correlation to wins but putts per round is significantly higher than the rest for top 10 finishes. Driving accuracy seems the least important and distance doesn't seem to matter for top 10 finishes.
+
 ![](images/win_top10_heatmap_top_performers_Strokes_Gained_Ranks.png)
 
 
-For the traditional statistics the driving distance and GIR have the highest correlation to wins but putts per round is significantly higher than the rest for top 10 finishes. Driving accuracy seems the least important and distance doesn't seem to matter for top 10 finishes.
+
 
 For the strokes gained statistics approach-the-green has the highest correlation with wins and putting has the lowest (nearly zero). For top 10s putting has the highest correlation and off-the-tee (driving) has the lowest.
 
