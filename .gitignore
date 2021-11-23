@@ -128,7 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# The proposal directory
+# also ignore
 proposal/
 .vscode/
 Archive/
+Notes.md
+.gitignore

@@ -37,6 +37,15 @@ First lets review the traditional statistics. The table below gives a descriptio
 | **Scrambling** | The percent of time a player misses the Green in Regulation, but still makes par or better. |
 | **Putts per Round** | The average number of putts a player takes each round. |
 
+<details>
+    <summary>Overview image</summary>
+
+![](images/masters-shot-track.png)
+
+</details>
+
+[Jump to Strokes Gained](#sg_table)
+
 The benefit of these traditional statistics are they are very straightforward and easy to calculate. A golfer at any skill level could track these for themselves during a round. Where these statistics lack is the ability to isolate each aspect of golf to a single stat. This is due to the fact that each subsequent shot is dependent on the prior result. The figure below shows how the number of putts per round is related to both the GIR percentage and scrambling percentage. 
 
 ![](images/dependency_between_gir_scrambling_putts.png)
@@ -50,6 +59,12 @@ Consider how the GIR percentage could also be dependent on the Driving Distance 
 The strokes gained concept was developed by Professor Mark Broadie from Columbia University as a way to isolate each aspect of the game. I will give a brief overview of the concept but a more in depth description is on the [PGA TOUR strokes gained site](https://www.pgatour.com/news/2016/05/31/strokes-gained-defined.html). The strokes gained (SG) concept measures how well a player performs each shot based on the average tour player. The concept is made possible because of a ShotLink data that has been recorded since 2004.  There is a baseline for the average number of strokes it takes tour players to hole out from various distances based on where the shot is taken from (tee, fairway, rough, green, or other). The SG for each stroke has to do with what the expected number of strokes are from the current position and the expected number of strokes from where the shot ends up. There is a SG statistic for each of the four aspects of golf, they are listed in the table below.
 
 ### Strokes Gained Statistics <a name='sg_table'>  </a>
+<details>
+    <summary>Overview image</summary>
+
+![](images/masters-shot-track.png)
+
+</details>
 
 | Name | Description |
 |---|---|
@@ -126,6 +141,8 @@ The distribution of the top performers is mostly even for driving distance and a
 ![](images/violins_with_top_players_overlaid_Fairways,_Greens,_and_Scrambling.png)
 
 ![](images/violins_with_top_players_overlaid_Average_Putts_per_Round.png)
+
+[Jump to SG](#sg_violin)
 
 That being said, I already made the case that traditional statistics are not the best indicators of performance in individual aspects of the game. Consider instead the figure below, which is the same type of plots but for the strokes gained statistics. Notice that for these the median values are all close to zero. This is to be expected due to the nature of comparing the player's strokes gained to the field. The distribution of the top performers in this figure tells a different story about driving the ball. Here the majority of top performers are above average with respect to strokes gained off-the-tee. So maybe driving isn't just for show? Due to the lack of an obvious trend in one aspect over another I will refrain from making any conclusions on the most important aspect until a more in depth statistical analysis is made. I will say (again) that the strokes gained method should be used over the traditional statistics for that analysis.
 
