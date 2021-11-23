@@ -1,35 +1,44 @@
 
 ## TO DO:
 X change nans to 0 for wins and top 10s  
-X for each year rank each statistical category - this will nearly double the number of columns - how will ties be handled?  
-x Look at the distribution of the statistics, how much do they vary between the players?
-x make heat map of just wins/top 10s vs the traditional statistics, another with strokes gained statistics, and two more with the ranks for each
-_ Look at the player with the most wins/top 10s each year, where did they rank?
-_ violin plots with top players plotted - swarmplot or stripplot
-_ organize/strucutre py files for execution
-_ scatter plot of gir and putts (show why strokes gained is used)
+X for each year rank each statistical category - this will nearly double the number of columns - how will ties be handled?    
+x Look at the distribution of the statistics, how much do they vary between the players?  
+x make heat map of just wins/top 10s vs the traditional statistics,   another with strokes gained statistics, and two more with the ranks for each  
+_ Look at the player with the most wins/top 10s each year, where did they rank?  
+_ violin plots with top players plotted - swarmplot or stripplot  
+X organize/strucutre py files for execution  
+X scatter plot of gir and putts (show why strokes gained is used)  
+[ ] adjust plots for README.md - check on GitHub to make sure they look good  
+[ ] clean up code
+_ cumulative distibution (what percent of top performers are in the top X of each statistic)
 
-
-
-Accomplished yesterday:
+**Accomplished yesterday:**
 _ function for creating win and top 10 heat maps  
 _ made violin plots of statistical categories overlaid with players with the most wins and top 10s  
 X organize/strucutre py files for execution  
 x build function for making the violin plots - or alternative plots  
 X scatter plot of gir and putts (show why strokes gained is used)
+-[x] redo heatmap with the correlation between just top performers    
+-[x] started draft of readme
 
-Plan today:
-_ redo heatmap with the correlation between just top performers  
-_ get draft of read me 
-_ pretty some of figures
+**Plan today: **   
+-[ ] finish draft of read me   
+-[ ] pretty some of figures
 
-MVP
+**MVP**
 - two small heat maps of traditional and strokes gained statistics
 - violin plots with top performers overlaid
 
 
-Notes: Scatter plot of interesting points
+Notes:   
+Scatter plot of interesting points  
 Could look at changes throught years
+
+
+## Elevator pitch
+"Drive for show, putt for dough"
+Investigate PGA tour data from 2010-2018 - determin if one aspect of golf is more prevelant in top performers.
+
 
 ## Initial look
 
@@ -50,7 +59,8 @@ Overall
 Dustin Johnson 13 Wins 59 top 10s
 
 
-
+Ranked in the top 3 wins or top 10s
+42 unique players, 73 data points
 
 
 Column Name             

@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+sns.set_theme(style='darkgrid')
+plt.rcParams.update({'font.size': 14, 'font.family': 'sans'})
+
 def make_double_scatter_plot(df,xcols,ycol,alpha=1,with_top_performers=True,title=None,show_legend=True,save_path=None):
     '''
     Makes figure with two subplots, each scatter plots that share a y axis.
@@ -48,18 +51,25 @@ def make_win_top10_heatmaps(df,group,just_top_performers=False):
     '''
     if just_top_performers:
         df = df[(df['Wins rank']<=3) | (df['Top 10 rank']<=3)]
-        title_str = 
+        title_str = f'{group.name} Correlation of Finishes for Top Performers'
         save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_top_performers_{group.name.replace(" ","_")}.png'
     else:
         title_str = group.name
         save_path_name = f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/win_top10_heatmap_{group.name.replace(" ","_")}.png'
+    # corr = df[['Wins','Top 10']+group.column_names].corr()
+    # fig,ax = plt.subplots()
+    # sns.heatmap(corr.iloc[:2,2:], annot=True,ax=ax)
+    # ax.set_title(title_str)
+    # ax.set_xticklabels(group.proper_names,rotation=90)
+    # fig.tight_layout()      
+    # fig.savefig(save_path_name)
     corr = df[['Wins','Top 10']+group.column_names].corr()
     fig,ax = plt.subplots()
-    sns.heatmap(corr.iloc[:2,2:], annot=True,ax=ax)
-    ax.set_title(group.name)
-    ax.set_xticklabels(group.proper_names)
+    sns.heatmap(corr.iloc[2:,:2], annot=True,ax=ax)
+    ax.set_title(title_str)
+    ax.set_yticklabels(group.proper_names)
     fig.tight_layout()      
-    fig.savefig(save_path_name)
+    fig.savefig(save_path_name,bbox_inches='tight')
 
 def make_win_top10_quad_heatmaps(df,stat_groups):
     '''
