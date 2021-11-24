@@ -130,5 +130,30 @@ def make_player_overview_plot(df,player):
     fig.tight_layout()
     fig.savefig(f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/player_overview_{player.replace(" ","_")}.png')
 
+def make_player_overview_plot(df,player,ranks=False):
+    '''
+    Plots the strokes gained statistics and number of wins and top 10s for each year for an individual player.
+    INPUT: df - data frame
+           player -  str 
+    '''
+    stat_columns = ['SG:OTT','SG:APR','SG:ARG','Average SG Putts']
+    title_string = f'{player} Overview'
+    filename_string = f'player_overview_{player.replace(" ","_")}'
+    if ranks:
+        stat_columns = [stat + ' rank' for stat in stat_columns]
+        title_string = f'{player} Overview - Rank Based'
+        filename_string = f'player_overview_rank_based_{player.replace(" ","_")}'
+    fig,axs = plt.subplots(2,1,sharex=True)
+    df[df['Player Name']==player].plot(x='Year',y=stat_columns,ax=axs[0])
+    axs[0].set_ylabel('Strokes Gained')
+    axs[0].legend(['SG:OTT','SG:APP','SG:ARG','SG:Putting'],bbox_to_anchor=(1,0.5),loc='center left')
+    df[df['Player Name']==player].plot(x='Year',y=['Top 10','Wins'],ax=axs[1])
+    axs[1].set_ylabel('Wins/Top 10s')
+    axs[1].legend(['Top 10s','Wins'],bbox_to_anchor=(1,0.5),loc='center left')
+    fig.suptitle(title_string)
+    fig.tight_layout()
+    fig.savefig(f'/home/rpeterson/Documents/dai/repos/pga_tour_analysis/images/{filename_string}.png')
+
+
 if __name__ == "__main__":
     pass

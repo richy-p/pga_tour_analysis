@@ -78,3 +78,6 @@ if __name__ == "__main__":
     individual_track_list = get_top_individuals(df)
     for player in individual_track_list:
         myplt.make_player_overview_plot(df,player)
+
+    for player in individual_track_list:
+        myplt.make_player_overview_plot(df,player,ranks=True)
